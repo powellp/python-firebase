@@ -1,0 +1,30 @@
+import firebase_admin
+from firebase_admin import credentials
+from pprint import pprint
+
+from firebase_admin import db
+
+cred = credentials.Certificate('my-notes-cred.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL' : 'https://my-notes-d3bed.firebaseio.com/'
+})
+
+# mary = db.reference('storageData/{0}'.format(new_user.key)).get()
+
+data = db.reference("storageData")
+
+fetched = data.get()
+
+# pprint(fetched.keys())
+
+for i in fetched.values():
+
+    print(i.get("url"))
+    # print(i.get("collegeName"))
+    # print(i.get("deptName"))
+
+
+print(type(data.get()))
+
+# print 'Dept Name:', mary['deptName']
+# print 'College Name:', mary['collegeName']
